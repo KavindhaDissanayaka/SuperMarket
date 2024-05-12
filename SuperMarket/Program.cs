@@ -5,9 +5,17 @@ namespace SuperMarket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllersWithViews();
+
             var app = builder.Build();
 
-            app.MapGet("/", () => "I Am Going to hunt MVC");
+            app.UseRouting();
+
+            app.MapControllerRoute(
+                name:"default",
+                pattern:"{controller=Home}/{action=index}/{id?}"
+                );
 
             app.Run();
         }
